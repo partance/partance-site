@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>partance.tech</title>
+  <meta name="description" content="partance.tech — site en construction.">
+  <!-- Page de test : empêche Google de l'indexer. Supprime cette ligne le jour où le site doit être trouvé. -->
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#f3efe6">
+  <!-- Petite icône d'onglet (un écrou) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-8 -8 16 16'%3E%3Cpolygon points='7.5,0 3.75,6.5 -3.75,6.5 -7.5,0 -3.75,-6.5 3.75,-6.5' fill='%23c9a227'/%3E%3Ccircle r='2.6' fill='%2313263d'/%3E%3C/svg%3E">
+  <style>
+    /* ===== Couleurs : modifie ici pour changer tout le camion ===== */
+    :root {
+      --fond: #f3efe6;
+      --encre: #13263d;
+      --texte-doux: #5a6472;
+      --bleu: #1f4e8c;        /* plaques de la cabine */
+      --bleu-clair: #2b62a8;  /* déflecteur de toit */
+      --bleu-bord: #163a69;
+      --acier: #a9b3be;       /* bandes perforées */
+      --acier-bord: #6d7884;
+      --sombre: #4a525c;      /* pare-chocs */
+      --jaune: #e9b525;       /* batteries */
+      --jaune-bord: #b88a12;
+      --laiton: #c9a227;      /* écrous */
+      --laiton-bord: #8e7016;
+      --trou: #1a1f27;
+      --vitre: #cfe8f3;
+      --route: #3b4048;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 16px 24px;
+      background-color: var(--fond);
+      /* trame de petits trous, comme une plaque perforée */
+      background-image: radial-gradient(#ddd5c5 1.3px, transparent 1.5px);
+      background-size: 20px 20px;
+      color: var(--encre);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      text-align: center;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(2.4rem, 8vw, 4.2rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+    h1 span { color: var(--jaune-bord); }
+    .accroche {
+      margin: 12px 0 0;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--texte-doux);
+    }
+    figure { margin: 18px 0 0; width: min(100%, 900px); }
+    svg { display: block; width: 100%; height: auto; }
+    .legende { margin: 6px 0 0; font-size: 0.95rem; color: var(--texte-doux); }
+    footer { margin-top: 28px; font-size: 0.8rem; color: #8a8f98; }
+
+    /* ===== Styles des pièces du camion ===== */
+    .plaque-bleue { fill: var(--bleu); stroke: var(--bleu-bord); stroke-width: 2; }
+    .plaque-jaune { fill: var(--jaune); stroke: var(--jaune-bord); stroke-width: 2; }
+    .perfore { fill: url(#trous); }
+
+    /* Une "bande" = un tracé dessiné 3 fois : bord, corps, puis trous */
+    use.bord  { fill: none; stroke: var(--acier-bord); stroke-width: 22; stroke-linecap: round; }
+    use.corps { fill: none; stroke: var(--acier); stroke-width: 20; stroke-linecap: round; }
+    use.trous { fill: none; stroke: var(--trou); stroke-width: 7; stroke-linecap: round; stroke-dasharray: 0.01 19.99; }
+    use.corps.sombre { stroke: var(--sombre); }
+    use.bord.sombre  { stroke: #2f353c; }
+    use.bord.fine  { stroke-width: 14; }
+    use.corps.fine { stroke-width: 12; }
+    use.trous.fine { stroke-width: 5; stroke-dasharray: 0.01 15.99; }
+
+    /* ===== Animations ===== */
+    .tirets { animation: defile 0.5s linear infinite; }
+    @keyframes defile { to { stroke-dashoffset: 50; } }
+    .roue { transform-box: fill-box; transform-origin: center; animation: tourne 2.51s linear infinite; }
+    @keyframes tourne { to { transform: rotate(360deg); } }
+    .caisse { animation: cahot 0.45s ease-in-out infinite alternate; }
+    @keyframes cahot { to { transform: translateY(-1.5px); } }
+    @media (prefers-reduced-motion: reduce) {
+      .tirets, .roue, .caisse { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <!-- Texte principal : à modifier librement -->
+    <h1>partance<span>.tech</span></h1>
+    <p class="accroche">Site en construction</p>
+  </header>
+
+  <figure>
+    <svg viewBox="100 36 760 372" role="img" aria-labelledby="titre-camion">
+      <title id="titre-camion">Tracteur routier électrique assemblé en pièces métalliques perforées et boulons</title>
+
+      <defs>
+        <!-- Trame de trous pour les plaques (un trou tous les 20 px) -->
+        <pattern id="trous" width="20" height="20" patternUnits="userSpaceOnUse">
+          <circle cx="10" cy="10" r="3.4" fill="#1a1f27" fill-opacity="0.85"/>
+        </pattern>
+
+        <!-- Écrou en laiton -->
+        <g id="ecrou">
+          <polygon points="6,0 3,5.2 -3,5.2 -6,0 -3,-5.2 3,-5.2" fill="#c9a227" stroke="#8e7016" stroke-width="1"/>
+          <circle r="2.2" fill="#8e7016"/>
+        </g>
+
+        <!-- Faisceau des phares -->
+        <linearGradient id="faisceau" x1="0" x2="1" y1="0" y2="0">
+          <stop offset="0" stop-color="#ffe9a6" stop-opacity="0.6"/>
+          <stop offset="1" stop-color="#ffe9a6" stop-opacity="0"/>
+        </linearGradient>
+
+        <!-- Fondu de la route sur les bords -->
+        <linearGradient id="fondu" gradientUnits="userSpaceOnUse" x1="100" x2="860" y1="0" y2="0">
+          <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+          <stop offset="0.12" stop-color="#fff" stop-opacity="1"/>
+          <stop offset="0.88" stop-color="#fff" stop-opacity="1"/>
+          <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+        </linearGradient>
+        <mask id="masque-route">
+          <rect x="100" y="0" width="760" height="420" fill="url(#fondu)"/>
+        </mask>
+
+        <!-- Tracés des bandes perforées (les trous tombent tous les 20 px) -->
+        <g id="bandes-chassis">
+          <path d="M190 290 H730"/>
+        </g>
+        <g id="bandes-avant">
+          <path d="M570 110 H730"/>  <!-- toit -->
+          <path d="M730 110 V270"/>  <!-- montant avant -->
+          <path d="M570 210 H730"/>  <!-- ceinture de caisse -->
+          <path d="M650 110 V210"/>  <!-- montant de porte -->
+          <path d="M270 270 H330"/>  <!-- support de sellette -->
+          <path d="M450 230 V290"/>  <!-- séparation des batteries -->
+        </g>
+        <g id="bandes-sombres">
+          <path d="M690 290 H750"/>  <!-- pare-chocs -->
+        </g>
+        <g id="bandes-fines">
+          <path d="M588 320 A52 52 0 0 1 692 320"/>  <!-- garde-boue avant -->
+          <path d="M248 320 A52 52 0 0 1 274 275"/>  <!-- garde-boue arrière -->
+        </g>
+
+        <!-- Une roue (centrée sur 0,0) -->
+        <g id="roue">
+          <circle r="40" fill="#23262b"/>
+          <circle r="36" fill="none" stroke="#15171a" stroke-width="5" stroke-dasharray="5 4.425"/>
+          <circle r="27" fill="#3a3f46"/>
+          <circle r="22" fill="#c3ccd5" stroke="#8b96a3" stroke-width="1.5"/>
+          <circle cx="13" cy="0" r="3.2" fill="#1a1f27"/>
+          <circle cx="6.5" cy="11.26" r="3.2" fill="#1a1f27"/>
+          <circle cx="-6.5" cy="11.26" r="3.2" fill="#1a1f27"/>
+          <circle cx="-13" cy="0" r="3.2" fill="#1a1f27"/>
+          <circle cx="-6.5" cy="-11.26" r="3.2" fill="#1a1f27"/>
+          <circle cx="6.5" cy="-11.26" r="3.2" fill="#1a1f27"/>
+          <use href="#ecrou" transform="scale(1.25)"/>
+        </g>
+
+        <!-- Éclair (symbole électrique) -->
+        <path id="eclair" d="M2 -13 L-8 2 L-1 2 L-3 13 L8 -3 L1 -3 Z"/>
+      </defs>
+
+      <!-- ===== Route ===== -->
+      <g mask="url(#masque-route)">
+        <rect x="0" y="360" width="900" height="38" fill="#3b4048"/>
+        <rect x="0" y="360" width="900" height="4" fill="#2c3036"/>
+        <path class="tirets" d="M0 381 H900" stroke="#f3efe6" stroke-width="3" stroke-dasharray="26 24"/>
+      </g>
+      <ellipse cx="470" cy="362" rx="320" ry="6" fill="#000" fill-opacity="0.18"/>
+
+      <!-- Faisceau des phares -->
+      <polygon points="738,244 900,212 900,300 738,256" fill="url(#faisceau)"/>
+
+      <!-- ===== Caisse du camion (tout sauf les roues) ===== -->
+      <g class="caisse">
+
+        <!-- Châssis -->
+        <use href="#bandes-chassis" class="bord"/>
+        <use href="#bandes-chassis" class="corps"/>
+        <use href="#bandes-chassis" class="trous"/>
+
+        <!-- Sellette (où s'accroche la semi-remorque) -->
+        <path d="M252 262 H348 L342 249 H258 Z" fill="#5d6772" stroke="#3e464f" stroke-width="2"/>
+
+        <!-- Pack batteries -->
+        <rect x="360" y="220" width="180" height="80" rx="4" class="plaque-jaune"/>
+        <rect x="360" y="220" width="180" height="80" rx="4" class="perfore"/>
+        <rect x="387" y="242" width="36" height="36" rx="6" fill="#13263d"/>
+        <rect x="477" y="242" width="36" height="36" rx="6" fill="#13263d"/>
+        <use href="#eclair" x="405" y="260" fill="#e9b525"/>
+        <use href="#eclair" x="495" y="260" fill="#e9b525"/>
+
+        <!-- Câble haute tension (orange, comme sur les vrais véhicules électriques) -->
+        <path d="M534 246 C556 236 548 272 572 262" fill="none" stroke="#e8761c" stroke-width="5" stroke-linecap="round"/>
+
+        <!-- Déflecteur de toit (l'aérodynamique compte !) -->
+        <path d="M560 100 L560 58 Q652 50 742 100 Z" fill="#2b62a8" stroke="#163a69" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M578 70 Q650 64 716 96" fill="none" stroke="#1a1f27" stroke-opacity="0.85" stroke-width="6.5" stroke-linecap="round" stroke-dasharray="0.01 19.99"/>
+
+        <!-- Cabine : plaque bleue en L + vitre -->
+        <path d="M566 100 H640 V200 H734 Q740 200 740 206 V274 Q740 280 734 280 H566 Q560 280 560 274 V106 Q560 100 566 100 Z" class="plaque-bleue"/>
+        <path d="M566 100 H640 V200 H734 Q740 200 740 206 V274 Q740 280 734 280 H566 Q560 280 560 274 V106 Q560 100 566 100 Z" class="perfore"/>
+        <rect x="642" y="106" width="86" height="100" fill="#cfe8f3"/>
+        <polygon points="676,118 694,118 672,202 654,202" fill="#fff" fill-opacity="0.5"/>
+
+        <!-- Plaque de marque -->
+        <rect x="566" y="141" width="68" height="18" rx="3" fill="#0f2238"/>
+        <text x="600" y="154" font-size="10.5" font-weight="700" letter-spacing="1" text-anchor="middle" fill="#e9eef3"
+              font-family="ui-sans-serif, -apple-system, Segoe UI, Roboto, Arial, sans-serif">partance</text>
+
+        <!-- Porte : joint et poignée -->
+        <path d="M641 220 V279" stroke="#0f2238" stroke-opacity="0.6" stroke-width="1.5"/>
+        <rect x="664" y="233" width="18" height="5" rx="2.5" fill="#0f2238"/>
+
+        <!-- Bandes perforées (cadre de cabine, sellette, batteries) -->
+        <use href="#bandes-avant" class="bord"/>
+        <use href="#bandes-avant" class="corps"/>
+        <use href="#bandes-avant" class="trous"/>
+
+        <!-- Pare-chocs -->
+        <use href="#bandes-sombres" class="bord sombre"/>
+        <use href="#bandes-sombres" class="corps sombre"/>
+        <use href="#bandes-sombres" class="trous"/>
+
+        <!-- Garde-boue -->
+        <use href="#bandes-fines" class="bord fine"/>
+        <use href="#bandes-fines" class="corps fine"/>
+        <use href="#bandes-fines" class="trous fine"/>
+
+        <!-- Phare -->
+        <circle cx="730" cy="250" r="13" fill="#ffe9a6" fill-opacity="0.35"/>
+        <circle cx="730" cy="250" r="7" fill="#fff6d2" stroke="#d8b24a" stroke-width="1.5"/>
+
+        <!-- Rétroviseur caméra (moins de traînée qu'un rétroviseur classique) -->
+        <path d="M738 140 L763 154" stroke="#8f9aa6" stroke-width="5" stroke-linecap="round"/>
+        <rect x="757" y="149" width="19" height="11" rx="3" fill="#20252c"/>
+        <circle cx="772" cy="154.5" r="2" fill="#6fb3d9"/>
+
+        <!-- Écrous aux points d'assemblage -->
+        <use href="#ecrou" x="190" y="290"/>
+        <use href="#ecrou" x="250" y="290"/>
+        <use href="#ecrou" x="730" y="290"/>
+        <use href="#ecrou" x="750" y="290"/>
+        <use href="#ecrou" x="270" y="270"/>
+        <use href="#ecrou" x="330" y="270"/>
+        <use href="#ecrou" x="370" y="230"/>
+        <use href="#ecrou" x="530" y="230"/>
+        <use href="#ecrou" x="370" y="290"/>
+        <use href="#ecrou" x="530" y="290"/>
+        <use href="#ecrou" x="450" y="230"/>
+        <use href="#ecrou" x="450" y="290"/>
+        <use href="#ecrou" x="570" y="110"/>
+        <use href="#ecrou" x="650" y="110"/>
+        <use href="#ecrou" x="730" y="110"/>
+        <use href="#ecrou" x="570" y="210"/>
+        <use href="#ecrou" x="650" y="210"/>
+        <use href="#ecrou" x="730" y="210"/>
+        <use href="#ecrou" x="570" y="270"/>
+        <use href="#ecrou" x="730" y="270"/>
+        <use href="#ecrou" x="570" y="88"/>
+        <use href="#ecrou" x="630" y="88"/>
+      </g>
+
+      <!-- ===== Roues ===== -->
+      <g transform="translate(300 320)"><g class="roue"><use href="#roue"/></g></g>
+      <g transform="translate(640 320)"><g class="roue"><use href="#roue"/></g></g>
+    </svg>
+  </figure>
+
+  <p class="legende">Prototype n°0 — assemblé boulon par boulon.</p>
+
+  <footer>© 2026 partance.tech</footer>
+
+</body>
+</html>
