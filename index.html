@@ -72,6 +72,27 @@
     figure { margin: 18px 0 0; width: min(100%, 900px); }
     svg { display: block; width: 100%; height: auto; }
     .legende { margin: 6px 0 0; font-size: 0.95rem; color: var(--texte-doux); }
+
+    /* Bouton de contact, façon bande perforée avec deux écrous */
+    .contact { margin: 22px 0 0; }
+    .contact a {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: var(--acier);
+      border: 2px solid var(--acier-bord);
+      color: var(--encre);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.01em;
+      text-decoration: none;
+      transition: background-color 0.15s ease;
+    }
+    .contact a:hover { background: #c3ccd5; }
+    .contact a:focus-visible { outline: 3px solid var(--jaune); outline-offset: 3px; }
+    .contact svg { width: 16px; height: 16px; flex: none; }
     footer { margin-top: 28px; font-size: 0.8rem; color: #8a8f98; }
 
     /* ===== Styles des pièces du camion ===== */
@@ -128,8 +149,8 @@
   </header>
 
   <figure>
-    <svg viewBox="-10 -24 870 432" role="img" aria-labelledby="titre-camion">
-      <title id="titre-camion">Tracteur routier électrique en pièces métalliques perforées et boulons, relié à un satellite et à une borne de recharge solaire</title>
+    <!-- aria-label : description lue par les lecteurs d'écran, sans infobulle au survol -->
+    <svg viewBox="-10 -24 870 432" role="img" aria-label="Tracteur routier électrique en pièces métalliques perforées et boulons, relié à un satellite et à une borne de recharge solaire">
 
       <defs>
         <!-- Trame de trous pour les plaques (un trou tous les 20 px) -->
@@ -417,7 +438,25 @@
 
   <p class="legende">Prototype n°0 — des boulons solides, c’est important.</p>
 
+  <!-- Contact : l'adresse est assemblée par le petit script en bas de page,
+       pour la cacher aux robots qui collectent les e-mails pour le spam. -->
+  <p class="contact">
+    <a id="lien-contact">
+      <svg viewBox="-7 -7 14 14" aria-hidden="true"><polygon points="6,0 3,5.2 -3,5.2 -6,0 -3,-5.2 3,-5.2" fill="#c9a227" stroke="#8e7016" stroke-width="1"/><circle r="2.2" fill="#8e7016"/></svg>
+      <span id="adresse-contact">contact [at] partance.tech</span>
+      <svg viewBox="-7 -7 14 14" aria-hidden="true"><polygon points="6,0 3,5.2 -3,5.2 -6,0 -3,-5.2 3,-5.2" fill="#c9a227" stroke="#8e7016" stroke-width="1"/><circle r="2.2" fill="#8e7016"/></svg>
+    </a>
+  </p>
+
   <footer>© 2026 partance.tech</footer>
+
+  <script>
+    (function () {
+      var adresse = "contact" + "@" + "partance.tech";
+      document.getElementById("lien-contact").href = "mailto:" + adresse;
+      document.getElementById("adresse-contact").textContent = adresse;
+    })();
+  </script>
 
 </body>
 </html>
