@@ -73,12 +73,17 @@
     svg { display: block; width: 100%; height: auto; }
     .legende { margin: 6px 0 0; font-size: 0.95rem; color: var(--texte-doux); }
 
-    /* Bouton de contact, façon bande perforée avec deux écrous — en haut à droite, format réduit */
+    /* Boutons en haut à droite (contact, puis Hugging Face en dessous),
+       façon bande perforée avec deux écrous, format réduit */
     .contact {
       position: absolute;
       top: 14px;
       right: 16px;
       margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;  /* boutons alignés à droite, l'un sous l'autre */
+      gap: 6px;               /* espace entre les deux boutons */
     }
     .contact a {
       display: inline-flex;
@@ -147,15 +152,22 @@
 </head>
 <body>
 
-  <!-- Contact (en haut à droite) : l'adresse est assemblée par le petit script en bas de page,
+  <!-- Liens en haut à droite.
+       Contact : l'adresse est assemblée par le petit script en bas de page,
        pour la cacher aux robots qui collectent les e-mails pour le spam. -->
-  <p class="contact">
+  <nav class="contact" aria-label="Contact et liens">
     <a id="lien-contact">
       <svg viewBox="-7 -7 14 14" aria-hidden="true"><polygon points="6,0 3,5.2 -3,5.2 -6,0 -3,-5.2 3,-5.2" fill="#c9a227" stroke="#8e7016" stroke-width="1"/><circle r="2.2" fill="#8e7016"/></svg>
       <span id="adresse-contact">contact [at] partance.tech</span>
       <svg viewBox="-7 -7 14 14" aria-hidden="true"><polygon points="6,0 3,5.2 -3,5.2 -6,0 -3,-5.2 3,-5.2" fill="#c9a227" stroke="#8e7016" stroke-width="1"/><circle r="2.2" fill="#8e7016"/></svg>
     </a>
-  </p>
+    <!-- Profil Hugging Face (s'ouvre dans un nouvel onglet) -->
+    <a href="https://huggingface.co/Partance-Technologies" target="_blank" rel="noopener">
+      <svg viewBox="-7 -7 14 14" aria-hidden="true"><polygon points="6,0 3,5.2 -3,5.2 -6,0 -3,-5.2 3,-5.2" fill="#c9a227" stroke="#8e7016" stroke-width="1"/><circle r="2.2" fill="#8e7016"/></svg>
+      <span>Hugging Face</span>
+      <svg viewBox="-7 -7 14 14" aria-hidden="true"><polygon points="6,0 3,5.2 -3,5.2 -6,0 -3,-5.2 3,-5.2" fill="#c9a227" stroke="#8e7016" stroke-width="1"/><circle r="2.2" fill="#8e7016"/></svg>
+    </a>
+  </nav>
 
   <header>
     <!-- Texte principal : à modifier librement -->
